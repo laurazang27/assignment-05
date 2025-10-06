@@ -12,7 +12,6 @@ format:
     toc: false
     width: 1280
     height: 720
-    zoom: 0.85
 footer: "© 2025 Laura Zang • Data: World Bank WDI"
 execute:
   echo: false
