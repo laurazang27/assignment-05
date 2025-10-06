@@ -1,0 +1,22 @@
+project:
+  type: default
+
+format:
+  html:
+    toc: true
+    code-fold: show
+    code-tools: true
+  pdf:
+    documentclass: article
+    keep-tex: false
+
+bibliography: refs.bib
+
+execute:
+  echo: false        
+  warning: false
+  message: false
+
+crossref:
+  fig-prefix: "Figure"
+  tbl-prefix: "Table"

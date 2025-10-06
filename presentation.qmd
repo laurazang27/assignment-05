@@ -1,0 +1,316 @@
+---
+title: "Exploratory Data Analysis"
+subtitle: "Key Development Indicators (WDI)"
+author: "Laura Zang"
+date: 2025-10-06
+format:
+  revealjs:
+    theme: [simple, custom.scss]
+    transition: fade
+    slide-number: true
+    incremental: true
+    toc: false
+footer: "© 2025 Laura Zang • Data: World Bank WDI"
+execute:
+  echo: false
+bibliography: refs.bib
+jupyter: python3
+---
+## Title Slide
+
+### Exploring Global Development Indicators  
+**Data Source:** World Bank (2023)  
+**Prepared by:** Laura Zang
+
+## Agenda
+
+- Dataset overview  
+- Visualizations  
+- Key insights  
+- References  
+
+## Data Overview
+
+We analyze three core indicators:  
+- **GDP per Capita (US$)**  
+- **Life Expectancy (years)**  
+- **Healthcare Expenditure (% of GDP)**
+
+```{python}
+#| label: setup
+#| include: false
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import wbgapi as wb
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+
+# Define the indicators to download
+indicators = {
+    'gdp_per_capita': 'NY.GDP.PCAP.CD',
+    'gdp_growth_rate': 'NY.GDP.MKTP.KD.ZG',
+    'inflation_rate': 'FP.CPI.TOTL.ZG',
+    'unemployment_rate': 'SL.UEM.TOTL.ZS',
+    'total_population': 'SP.POP.TOTL',
+    'life_expectancy': 'SP.DYN.LE00.IN',
+    'adult_literacy_rate': 'SE.ADT.LITR.ZS',
+    'income_inequality': 'SI.POV.GINI',
+    'health_expenditure_gdp_share': 'SH.XPD.CHEX.GD.ZS',
+    'measles_immunisation_rate': 'SH.IMM.MEAS',
+    'education_expenditure_gdp_share': 'SE.XPD.TOTL.GD.ZS',
+    'primary_school_enrolment_rate': 'SE.PRM.ENRR',
+    'exports_gdp_share': 'NE.EXP.GNFS.ZS'
+}
+
+# Get the list of country codes for the "World" region
+country_codes = wb.region.members('WLD')
+
+# Download data for countries only in 2022
+df = wb.data.DataFrame(indicators.values(), economy=country_codes, time=2022, skipBlanks=True, labels=True).reset_index()
+
+# Delete the 'economy' column
+df = df.drop(columns=['economy'], errors='ignore')
+
+# Create a reversed dictionary mapping indicator codes to names
+# Rename the columns and convert all names to lowercase
+df.rename(columns=lambda x: {v: k for k, v in indicators.items()}.get(x, x).lower(), inplace=True)
+
+# Sort 'country' in ascending order
+df = df.sort_values('country', ascending=True)
+
+# Reset the index after sorting
+df = df.reset_index(drop=True)
+
+# Save the data to a CSV file
+df.to_csv('wdi.csv', index=False)
+```
+
+```{python}
+#| label: tbl-summary-stats
+#| fig-cap: "Summary statistics for GPD/capita, life expectancy, and health expenditure (% of gdp)."
+
+# Show summary statistics for our chosen indicators
+df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']].describe()
+```
+
+## Correlation Matrix
+
+Economic wealth is the strongest driver of longevity (r ≈ 0.57).
+Health spending share has only a minor connection to both GDP and life expectancy.
+
+This suggests that quality and efficiency of healthcare matter more than the proportion of GDP allocated to it.
+
+```{python}
+#| label: tbl-correlations
+#| fig-cap: "Correlation scores between GDP/capita, life expectancy, and health expenditure (% of gdp)."
+
+# Show correlation matrices
+df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']].corr()
+```
+
+## Pairwise Relationships
+
+GDP per capita is strongly and positively associated with life expectancy, while both indicators display only weak relationships with health expenditure as a share of GDP.  
+
+The distributions along the diagonal highlight that income is highly skewed, whereas life expectancy and health spending are more evenly distributed across countries.
+
+
+```{python}
+#| label: fig-pairwise
+#| fig-cap: "Pairwise relationships among GDP per capita, life expectancy, and health expenditure (% of GDP)."
+#| echo: false
+
+sns.pairplot(df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']], diag_kind='kde')
+```
+
+
+## GDP vs. Life Expectancy
+
+This graph shows an upward relationship between GDP per capita and life expectancy. Wealthier nations tend to have longer lifespans, though the relationship flattens for very high-income countries, suggesting diminishing returns from income on health outcomes.
+
+This pattern directly reflects findings from McKinsey Global Institute’s “Pixels of Progress” report (2022), which notes that “an additional dollar of GDP per capita ‘buys’ more life expectancy at lower levels of income: the slope of the curve gets flatter as GDP per capita grows”. 
+
+In other words, improvements in life expectancy are most dramatic in low- and middle-income economies where new income enables access to basic healthcare, sanitation, and nutrition. Once these needs are met, further increases in income yield smaller health gains, and longevity improvements depend more on innovation, public health policy, and system efficiency than on GDP growth alone.
+
+
+```{python}
+#| label: fig-gdp-life
+#| fig-cap: "Relationship between GDP per capita and life expectancy. Source: World Bank WDI (2023)."
+#| echo: false
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+sns.set(style="whitegrid")
+
+plt.figure(figsize=(7,5))
+sns.regplot(
+    data=df,
+    x="gdp_per_capita", 
+    y="life_expectancy",
+    scatter_kws={"alpha":0.6, "s":40, "color":"skyblue"},
+    line_kws={"color":"darkblue", "linewidth":2}
+)
+plt.title("GDP per Capita vs Life Expectancy")
+plt.xlabel("GDP per capita (current US$)")
+plt.ylabel("Life expectancy (years)")
+plt.tight_layout()
+plt.show()
+
+```
+
+
+## Health Expenditure vs. Life Expectancy (Clusters)
+
+Overall: The relationship between health spending and life expectancy varies across country clusters, reflecting differences in health system efficiency. 
+
+- Cluster 1 (orange): High-income, efficient systems with ~80–85 yrs life expectancy and moderate spending (5–10 % of GDP). 
+  - The USA is a clear outlier with highest spending but lower-than-expected life expectancy, consistent with Our World in Data (2020) findings.
+
+- Cluster 0 (green): Middle-income, developing systems where higher spending still yields measurable life-expectancy gains.
+
+- Cluster 2 (blue): Low-income or inefficient systems that spend more (10–20 % of GDP) yet achieve shorter lifespans (~50–70 yrs).
+
+
+```{python}
+#| label: fig-health-clusters
+#| fig-cap: "Clusters of countries based on health expenditure (% of GDP) and life expectancy. Source: World Bank WDI (2023)."
+#| echo: false
+# Select relevant features and drop missing data
+features = ['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']
+X = df[features]
+valid = X.dropna()
+valid_idx = valid.index
+
+# Standardize the data and fit KMeans (3 clusters)
+X_scaled = StandardScaler().fit_transform(valid)
+kmeans = KMeans(n_clusters=3, n_init=10, random_state=42)
+labels = kmeans.fit_predict(X_scaled)
+
+# Assign clusters back to main df
+df['cluster_health'] = pd.NA
+df.loc[valid_idx, 'cluster_health'] = labels
+
+# Create plotting subset
+plot_df = df.loc[valid_idx].copy()
+plot_df['cluster_health'] = plot_df['cluster_health'].astype('int')
+
+# Plot health expenditure vs life expectancy
+sns.set(style="whitegrid")
+g = sns.lmplot(
+    data=plot_df,
+    x="health_expenditure_gdp_share",
+    y="life_expectancy",
+    hue="cluster_health",
+    palette="Set2",
+    height=6,
+    aspect=1.2,
+    scatter_kws={"alpha":0.7, "s":60},
+    line_kws={"linewidth":2}
+)
+
+# Highlight and label the United States
+usa = df[df['country'] == 'United States']
+if not usa.empty:
+    plt.scatter(
+        usa['health_expenditure_gdp_share'],
+        usa['life_expectancy'],
+        color='red',
+        s=120,
+        edgecolor='black',
+        zorder=5,
+        label="United States"
+    )
+    plt.text(
+        usa['health_expenditure_gdp_share'].values[0] + 0.3,
+        usa['life_expectancy'].values[0] + 0.3,
+        "USA",
+        color='black',
+        fontsize=10,
+        weight='bold'
+    )
+
+plt.title("Health Expenditure vs Life Expectancy by Cluster")
+plt.xlabel("Health Expenditure (% of GDP)")
+plt.ylabel("Life Expectancy (years)")
+plt.legend()
+plt.tight_layout()
+plt.show()
+```
+
+## Key Statistics
+
+The U.S. Healthcare Paradox:
+
+- Extreme wealth, modest outcomes: The U.S. is one of the richest nations (GDP per capita ≈ $77,900) yet achieves lower life expectancy than its high-income peers.
+
+- Diminishing returns: Reflecting McKinsey (2023), further income growth yields smaller health gains once basic needs are met.
+
+- High spending, low efficiency: The U.S. spends 16.5% of GDP on healthcare—about double the high-income average—but life expectancy (77.4 years) lags nearly four years behind.
+
+- Outlier status: As shown in @fig-health-clusters, the U.S. stands out as an inefficient system, supporting Our World in Data (2024) findings that efficiency and equity, not spending volume, drive future health improvements.
+
+```{python}
+#| label: tbl-usa-comparison
+#| tbl-cap: "Comparison of the United States with global and high-income averages. Source: World Bank WDI (2023)."
+#| echo: false
+
+# Identify high-income group (top 20% by GDP per capita)
+threshold = df['gdp_per_capita'].quantile(0.8)
+high_income = df[df['gdp_per_capita'] >= threshold]
+
+# U.S. subset
+usa = df[df['country'] == 'United States']
+
+# Compute summary comparisons
+comparison = pd.DataFrame({
+    'Indicator': ['GDP per capita (US$)', 'Life expectancy (years)', 'Health expenditure (% of GDP)'],
+    'United States': [
+        usa['gdp_per_capita'].values[0],
+        usa['life_expectancy'].values[0],
+        usa['health_expenditure_gdp_share'].values[0]
+    ],
+    'High-income avg': [
+        high_income['gdp_per_capita'].mean(),
+        high_income['life_expectancy'].mean(),
+        high_income['health_expenditure_gdp_share'].mean()
+    ],
+    'Global avg': [
+        df['gdp_per_capita'].mean(),
+        df['life_expectancy'].mean(),
+        df['health_expenditure_gdp_share'].mean()
+    ]
+})
+
+comparison = comparison.round(2)
+comparison.style.hide(axis='index').format({
+    'United States': '{:,.2f}',
+    'High-income avg (top 20%)': '{:,.2f}',
+    'Global avg': '{:,.2f}'
+})
+
+```
+
+## Conclusion
+
+- **Global trends:** 
+  - Higher GDP per capita is strongly linked to longer life expectancy, but the relationship flattens at high income levels — showing diminishing health returns from wealth.
+  - Health expenditure shares only a weak positive link with longevity, suggesting that how money is spent matters more than how much is spent.
+
+- **Cluster insights**: 
+  - High-income nations achieve strong outcomes with moderate, efficient spending. 
+  - Middle-income countries still gain measurable improvements as investment rises.
+  - Some low-income nations show inefficient spending, with high costs but limited progress.
+
+- **The U.S. paradox:**
+  - The United States exemplifies inefficiency — spending 16.5% of GDP on healthcare yet ranking below peers in life expectancy.
+  - Confirms findings from McKinsey (2023) and Our World in Data (2024) that system efficiency, equity, and innovation are now the main drivers of health gains, not wealth alone.
+
+***Economic growth enables better health, but only when paired with efficient, equitable, and innovative healthcare systems.***
+
+
+## References
+
+::: {#refs}
+:::

@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Laura Zang">
+<meta name="dcterms.date" content="2025-10-06">
+
+<title>qtm-assignment-05</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="report_files/libs/clipboard/clipboard.min.js"></script>
+<script src="report_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="report_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="report_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="report_files/libs/quarto-html/popper.min.js"></script>
+<script src="report_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="report_files/libs/quarto-html/anchor.min.js"></script>
+<link href="report_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="report_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="report_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="report_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#dataset-creation" id="toc-dataset-creation" class="nav-link active" data-scroll-target="#dataset-creation">2. Dataset Creation</a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">3. Exploratory Data Analysis</a>
+  <ul class="collapse">
+  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics">Summary Statistics</a></li>
+  <li><a href="#correlation-matrices" id="toc-correlation-matrices" class="nav-link" data-scroll-target="#correlation-matrices">Correlation Matrices</a></li>
+  <li><a href="#distributions" id="toc-distributions" class="nav-link" data-scroll-target="#distributions">Distributions</a></li>
+  </ul></li>
+  <li><a href="#visualizations" id="toc-visualizations" class="nav-link" data-scroll-target="#visualizations">4. Visualizations</a></li>
+  <li><a href="#key-statistics" id="toc-key-statistics" class="nav-link" data-scroll-target="#key-statistics">5. Key Statistics</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">qtm-assignment-05</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Laura Zang </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 6, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="dataset-creation" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-creation">2. Dataset Creation</h2>
+<div id="77db3efc" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-stdout">
+<pre><code>(217, 14)
+       country  inflation_rate  exports_gdp_share  gdp_growth_rate  \
+0  Afghanistan       13.712102          18.380042        -6.240172   
+1      Albania        6.725203          37.197082         4.826696   
+2      Algeria        9.265516          30.808979         3.600000   
+
+   gdp_per_capita  adult_literacy_rate  primary_school_enrolment_rate  \
+0      357.261153                  NaN                            NaN   
+1     6846.426694                 98.5                      96.371231   
+2     4961.552577                  NaN                     108.343933   
+
+   education_expenditure_gdp_share  measles_immunisation_rate  \
+0                              NaN                       56.0   
+1                         2.744330                       86.0   
+2                         4.749247                       79.0   
+
+   health_expenditure_gdp_share  income_inequality  unemployment_rate  \
+0                     23.088169                NaN             14.100   
+1                      6.193681                NaN             10.137   
+2                      3.623043                NaN             12.346   
+
+   life_expectancy  total_population  
+0           65.617        40578842.0  
+1           78.769         2777689.0  
+2           76.129        45477389.0  </code></pre>
+</div>
+</div>
+</section>
+<section id="exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis">3. Exploratory Data Analysis</h2>
+<p>I will analyze the following three indicators from the dataset: 1. GDP per capita 2. Life expectancy 3. Health expenditure as % of GDP</p>
+<section id="summary-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="summary-statistics">Summary Statistics</h3>
+<p>Analysis of <a href="#tbl-summary-stats" class="quarto-xref">Table&nbsp;1</a>:</p>
+<ol type="1">
+<li>GDP per capita shows extremely wide variation, ranging from about $251 to over $226,000.</li>
+</ol>
+<ul>
+<li>The mean ($21,076) is far higher than the median ($7,656), indicating a right-skewed distribution. A few wealthy countries drive up the average while most economies have much lower income per person.</li>
+<li>The large standard deviation ($30,994) confirms strong inequality in economic output across countries.</li>
+</ul>
+<ol start="2" type="1">
+<li>Life expectancy values range from 18.8 years to 85.7 years, with a mean of about 73.1 years.</li>
+</ol>
+<ul>
+<li>The interquartile range (67.8 – 78.5) indicates that most countries cluster around 70–80 years.</li>
+<li>The relatively small standard deviation (≈ 7.9) shows that life expectancy is less dispersed than income levels, reflecting global improvements in public health.</li>
+</ul>
+<ol start="3" type="1">
+<li>Health expenditure GDP share ranges from 1.8% to 23%.</li>
+</ol>
+<ul>
+<li>Distribution is moderately right-skewed: most countries spend ~4–9% of GDP on health; a small set spend &gt;10%, and a few outliers reach ~23%.</li>
+</ul>
+<div class="cell" data-execution_count="3">
+<div id="tbl-summary-stats" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-summary-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1
+</figcaption>
+<div aria-describedby="tbl-summary-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="129">
+<div>
+
+
+<table class="dataframe do-not-create-environment caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">gdp_per_capita</th>
+<th data-quarto-table-cell-role="th">life_expectancy</th>
+<th data-quarto-table-cell-role="th">health_expenditure_gdp_share</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>209.000000</td>
+<td>217.000000</td>
+<td>191.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>21076.940879</td>
+<td>73.108020</td>
+<td>6.883157</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>30993.910263</td>
+<td>7.942539</td>
+<td>3.284450</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>250.634225</td>
+<td>18.818000</td>
+<td>1.817682</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>2620.838043</td>
+<td>67.788000</td>
+<td>4.374079</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>7655.594210</td>
+<td>74.160976</td>
+<td>6.500235</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>28451.147783</td>
+<td>78.531000</td>
+<td>8.825374</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>226052.001905</td>
+<td>85.746000</td>
+<td>23.088169</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+<p>Summary statistics for GPD/capita, life expectancy, and health expenditure (% of gdp).</p>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="correlation-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="correlation-matrices">Correlation Matrices</h3>
+<p><a href="#tbl-correlations" class="quarto-xref">Table&nbsp;2</a> highlights the strength and direction of linear relationships among the three key indicators:</p>
+<ol type="1">
+<li><p>GDP per capita and life expectancy (r = 0.57): This is a moderately strong positive correlation. Countries with higher income/person tend to have longer average lifespans. This makes sense, as higher income levels typically correspond to better access to healthcare, nutrition, and education, all of which improve life expectancy.</p></li>
+<li><p>GDP per capita and health expenditure (r = 0.145): Weak positive relationship. This shows that richer countries do not necessarily spend a higher share of GDP on health.</p></li>
+<li><p>Health expenditure and unemployment rate (r = 0.158): Weakly positive. Countries that devote a larger share of GDP to health tend to have slightly higher life expectancy, but it’s far from a strong one-to-one relationship. Spending more doesn’t automatically translate to better outcomes.</p></li>
+</ol>
+<p>Economic wealth is the strongest driver of longevity (r ≈ 0.57). Health spending share has only a minor connection to both GDP and life expectancy. This suggests that quality and efficiency of healthcare matter more than the proportion of GDP allocated to it.</p>
+<div class="cell" data-execution_count="4">
+<div id="tbl-correlations" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-correlations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2
+</figcaption>
+<div aria-describedby="tbl-correlations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="130">
+<div>
+
+
+<table class="dataframe do-not-create-environment caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">gdp_per_capita</th>
+<th data-quarto-table-cell-role="th">life_expectancy</th>
+<th data-quarto-table-cell-role="th">health_expenditure_gdp_share</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">gdp_per_capita</th>
+<td>1.000000</td>
+<td>0.572225</td>
+<td>0.145007</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">life_expectancy</th>
+<td>0.572225</td>
+<td>1.000000</td>
+<td>0.157597</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">health_expenditure_gdp_share</th>
+<td>0.145007</td>
+<td>0.157597</td>
+<td>1.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+<p>Correlation scores between GDP/capita, life expectancy, and health expenditure (% of gdp).</p>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="distributions" class="level3">
+<h3 class="anchored" data-anchor-id="distributions">Distributions</h3>
+<div id="cell-fig-distributions" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div id="fig-distributions" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-distributions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="report_files/figure-html/fig-distributions-output-1.png" width="1424" height="367" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-distributions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Distribution of indicators. Source: World Bank WDI (2022).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>As shown in <a href="#fig-distributions" class="quarto-xref">Figure&nbsp;1</a>, GDP per capita is heavily skewed right, showing large wealth inequalities across countries. Unemployment rate is also skewed right, ranging from 0 to 35%. Life expectancy is the closest to being normally distributed with only a few small outliers below 50.</p>
+<ol type="1">
+<li><p>GDP per capita distribution: Highly right-skewed — the vast majority of countries have relatively low GDP per capita, with a few extremely wealthy outliers (above $100,000). This reflects global income inequality.</p></li>
+<li><p>Life expectancy distribution: Approximately normal, centered around 70–75 years, with slight left skew from a few low-life-expectancy countries (under 50 years). Outliers on the lower end may correspond to countries with conflict, poor healthcare access, or infectious diseases. This tighter, nearly symmetric distribution shows that health outcomes are less unequal than income — confirming a convergence in global life expectancy.</p></li>
+<li><p>Health expenditure (% of GDP) distribution: Moderately right-skewed, concentrated between 3–10%, with some countries spending up to 20%+ of GDP on health. Most nations allocate a modest share of their economy to health. The skew suggests that some economies must spend disproportionately more to sustain health outcomes, while others achieve efficiency at lower cost.</p></li>
+</ol>
+</section>
+</section>
+<section id="visualizations" class="level2">
+<h2 class="anchored" data-anchor-id="visualizations">4. Visualizations</h2>
+<div id="cell-fig-pairwise" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div id="fig-pairwise" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pairwise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="report_files/figure-html/fig-pairwise-output-1.png" width="708" height="708" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pairwise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Pairwise relationships among GDP per capita, life expectancy, and health expenditure (% of GDP).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-pairwise" class="quarto-xref">Figure&nbsp;2</a> reinforces that GDP per capita is strongly and positively associated with life expectancy, while both indicators display only weak relationships with health expenditure as a share of GDP. The distributions along the diagonal highlight that income is highly skewed, whereas life expectancy and health spending are more evenly distributed across countries.</p>
+<div id="cell-fig-gdp-life" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div id="fig-gdp-life" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gdp-life-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="report_files/figure-html/fig-gdp-life-output-1.png" width="656" height="463" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gdp-life-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Relationship between GDP per capita and life expectancy. Source: World Bank WDI (2022).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-gdp-life" class="quarto-xref">Figure&nbsp;3</a> shows an upward relationship between GDP per capita and life expectancy. Wealthier nations tend to have longer lifespans, though the relationship flattens for very high-income countries, suggesting diminishing returns from income on health outcomes.</p>
+<p>This pattern directly reflects findings from McKinsey Global Institute’s “Pixels of Progress” report (2022), which notes that “an additional dollar of GDP per capita ‘buys’ more life expectancy at lower levels of income: the slope of the curve gets flatter as GDP per capita grows” <span class="citation" data-cites="mckinsey_pixels_progress_ch3">(<a href="#ref-mckinsey_pixels_progress_ch3" role="doc-biblioref">Institute 2022</a>)</span>.</p>
+<p>In other words, improvements in life expectancy are most dramatic in low- and middle-income economies where new income enables access to basic healthcare, sanitation, and nutrition. Once these needs are met, further increases in income yield smaller health gains, and longevity improvements depend more on innovation, public health policy, and system efficiency than on GDP growth alone.</p>
+<div id="cell-fig-health-clusters" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div id="fig-health-clusters" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-health-clusters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="report_files/figure-html/fig-health-clusters-output-1.png" width="797" height="559" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-health-clusters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Clusters of countries based on health expenditure (% of GDP) and life expectancy. Source: World Bank WDI (2022).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-health-clusters" class="quarto-xref">Figure&nbsp;4</a>, a clustered regression plot, illustrates that the relationship between health expenditure (% of GDP) and life expectancy differs across groups of countries, reflecting disparities in health system efficiency and economic capacity.</p>
+<ol type="1">
+<li><p>Cluster 1 (orange) — High-income, efficient systems: These countries exhibit very high life expectancy (~80–85 years) despite moderate health spending (5–10% of GDP). This aligns with evidence from Our World in Data (2024), which shows that once nations surpass a certain threshold of per capita income, returns to health spending plateau. <span class="citation" data-cites="ourworldindata_life_expectancy_vs_health_expenditure">(<a href="#ref-ourworldindata_life_expectancy_vs_health_expenditure" role="doc-biblioref">Our World in Data 2024</a>)</span> Improvements in longevity depend more on social determinants like education and preventive care than on spending alone.</p>
+<ul>
+<li>Among the orange cluster, the USA is a clear outlier, achieving below average life expectancy for the cluster despite having the highest health expenditure as % of gdp of the cluster and the 4th highest overall. This suports evidence from Our World in Data (2020), which examines why life expectancy in the US is lower than in other rich countries. <span class="citation" data-cites="ourworldindata_us_life_expectancy">(<a href="#ref-ourworldindata_us_life_expectancy" role="doc-biblioref">Our World in Data 2020</a>)</span></li>
+</ul></li>
+<li><p>Cluster 0 (green) — Middle-income, developing systems: The positive slope indicates that higher spending continues to yield incremental gains in life expectancy.</p></li>
+<li><p>Cluster 2 (blue) — Low-income or inefficient systems: These nations spend a larger share of GDP (10–20%) on healthcare but still face lower life expectancy (~50–70 years).</p></li>
+</ol>
+</section>
+<section id="key-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="key-statistics">5. Key Statistics</h2>
+<div class="cell" data-execution_count="9">
+<div id="tbl-usa-comparison" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="9">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-usa-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Comparison of the United States with global and high-income averages. Source: World Bank WDI (2022).
+</figcaption>
+<div aria-describedby="tbl-usa-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="135">
+<style type="text/css">
+</style>
+
+<table id="T_8765a" class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th id="T_8765a_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Indicator</th>
+<th id="T_8765a_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">United States</th>
+<th id="T_8765a_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">High-income avg</th>
+<th id="T_8765a_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Global avg</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_8765a_row0_col0" class="data row0 col0">GDP per capita (US$)</td>
+<td id="T_8765a_row0_col1" class="data row0 col1">77,860.91</td>
+<td id="T_8765a_row0_col2" class="data row0 col2">69255.110000</td>
+<td id="T_8765a_row0_col3" class="data row0 col3">21,076.94</td>
+</tr>
+<tr class="even">
+<td id="T_8765a_row1_col0" class="data row1 col0">Life expectancy (years)</td>
+<td id="T_8765a_row1_col1" class="data row1 col1">77.43</td>
+<td id="T_8765a_row1_col2" class="data row1 col2">81.280000</td>
+<td id="T_8765a_row1_col3" class="data row1 col3">73.11</td>
+</tr>
+<tr class="odd">
+<td id="T_8765a_row2_col0" class="data row2 col0">Health expenditure (% of GDP)</td>
+<td id="T_8765a_row2_col1" class="data row2 col1">16.50</td>
+<td id="T_8765a_row2_col2" class="data row2 col2">8.410000</td>
+<td id="T_8765a_row2_col3" class="data row2 col3">6.88</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The data in <a href="#tbl-usa-comparison" class="quarto-xref">Table&nbsp;3</a> highlight a paradox in the relationship between national wealth, health spending, and longevity. Despite being among the richest nations in the world, the United States underperforms in life expectancy relative to both its peers and its spending levels.</p>
+<ol type="1">
+<li>GDP per capita (US$)</li>
+</ol>
+<p>The United States’ GDP per capita of $77,861 surpasses the high-income average ($69,255) by roughly 12% and exceeds the global average ($21,077) by more than 270%.</p>
+<p>This confirms the USA’s position as a global economic leader, with more than enough financial capacity to fund universal and advanced healthcare systems.</p>
+<p>However, as seen in <a href="#fig-gdp-life" class="quarto-xref">Figure&nbsp;3</a>, additional gains in income among already wealthy nations yield diminishing improvements in life expectancy, a phenomenon noted in the McKinsey Global Institute’s Pixels of Progress (2022) report. The U.S. has entered this “flat zone” of that curve, where marginal income gains no longer substantially extend life expectancy.</p>
+<ol start="2" type="1">
+<li>Life expectancy (years) U.S. life expectancy stands at 77.43 years, which is 3.85 years below the high-income average (81.28 years) and only 4.3 years above the global mean (73.11 years). This modest edge over the global average despite massive wealth underscores inefficiency in translating resources into health outcomes.</li>
+</ol>
+<p>In <a href="#fig-health-clusters" class="quarto-xref">Figure&nbsp;4</a>, the United States appears as a clear outlier within the high-income (orange) group: It lies to the far right (highest spending), but below the cluster’s regression line, showing lower-than-expected longevity given its economic and health investment levels.</p>
+<p>This mirrors Our World in Data (2024) findings showing that the United States spends more yet achieves less in life expectancy than its peers.</p>
+<ol start="3" type="1">
+<li>Health expenditure (% of GDP)</li>
+</ol>
+<p>The United States spends 16.5% of GDP on healthcare, nearly double the high-income average (8.4%) and more than twice the global average (6.9%). However, this disproportionate spending does not produce better outcomes which may imply poor effectiveness of healthcare spending.</p>
+<p>Research from Our World in Data (2024) emphasizes that once countries surpass roughly $5,000–$10,000 GDP per capita, further health gains depend less on spending volume and more on efficiency, equity, and public health infrastructure, explaining why the U.S. underperforms relative to its investment.</p>
+<hr>
+<!-- -->
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-mckinsey_pixels_progress_ch3" class="csl-entry" role="listitem">
+Institute, McKinsey Global. 2022. <span>“The Relationship Between Income and Health.”</span> <a href="https://www.mckinsey.com/mgi/our-research/pixels-of-progress-chapter-3" class="uri">https://www.mckinsey.com/mgi/our-research/pixels-of-progress-chapter-3</a>. <a href="https://www.mckinsey.com/mgi/our-research/pixels-of-progress-chapter-3">https://www.mckinsey.com/mgi/our-research/pixels-of-progress-chapter-3</a>.
+</div>
+<div id="ref-ourworldindata_us_life_expectancy" class="csl-entry" role="listitem">
+Our World in Data. 2020. <span>“Why Is Life Expectancy in the US Lower Than in Other Rich Countries?”</span> <a href="https://ourworldindata.org/us-life-expectancy-low#:~:text=The%20unequal%20development%20over%20recent,US%20will%20continue%20this%20year.">https://ourworldindata.org/us-life-expectancy-low#:~:text=The%20unequal%20development%20over%20recent,US%20will%20continue%20this%20year.</a>
+</div>
+<div id="ref-ourworldindata_life_expectancy_vs_health_expenditure" class="csl-entry" role="listitem">
+———. 2024. <span>“Life Expectancy Vs Health Expenditure.”</span> <a href="https://ourworldindata.org/grapher/life-expectancy-vs-health-expenditure" class="uri">https://ourworldindata.org/grapher/life-expectancy-vs-health-expenditure</a>. <a href="https://ourworldindata.org/grapher/life-expectancy-vs-health-expenditure">https://ourworldindata.org/grapher/life-expectancy-vs-health-expenditure</a>.
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "qtm-assignment-05"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Laura Zang"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-10-06"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf:</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">    fig-pos: "H"      # place figures exactly here</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">    tbl-pos: "H"      # place tables exactly here</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">      text: |</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">        \usepackage{float}   % enables the H specifier</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> visual</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3     # &lt;— add this line</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> wbgapi <span class="im">as</span> wb</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Dataset Creation</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the indicators to download</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>indicators <span class="op">=</span> {</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">'gdp_per_capita'</span>: <span class="st">'NY.GDP.PCAP.CD'</span>,</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">'gdp_growth_rate'</span>: <span class="st">'NY.GDP.MKTP.KD.ZG'</span>,</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">'inflation_rate'</span>: <span class="st">'FP.CPI.TOTL.ZG'</span>,</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">'unemployment_rate'</span>: <span class="st">'SL.UEM.TOTL.ZS'</span>,</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">'total_population'</span>: <span class="st">'SP.POP.TOTL'</span>,</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">'life_expectancy'</span>: <span class="st">'SP.DYN.LE00.IN'</span>,</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">'adult_literacy_rate'</span>: <span class="st">'SE.ADT.LITR.ZS'</span>,</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">'income_inequality'</span>: <span class="st">'SI.POV.GINI'</span>,</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">'health_expenditure_gdp_share'</span>: <span class="st">'SH.XPD.CHEX.GD.ZS'</span>,</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">'measles_immunisation_rate'</span>: <span class="st">'SH.IMM.MEAS'</span>,</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">'education_expenditure_gdp_share'</span>: <span class="st">'SE.XPD.TOTL.GD.ZS'</span>,</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    <span class="st">'primary_school_enrolment_rate'</span>: <span class="st">'SE.PRM.ENRR'</span>,</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">'exports_gdp_share'</span>: <span class="st">'NE.EXP.GNFS.ZS'</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the list of country codes for the "World" region</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>country_codes <span class="op">=</span> wb.region.members(<span class="st">'WLD'</span>)</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Download data for countries only in 2022</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> wb.data.DataFrame(indicators.values(), economy<span class="op">=</span>country_codes, time<span class="op">=</span><span class="dv">2022</span>, skipBlanks<span class="op">=</span><span class="va">True</span>, labels<span class="op">=</span><span class="va">True</span>).reset_index()</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete the 'economy' column</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">'economy'</span>], errors<span class="op">=</span><span class="st">'ignore'</span>)</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a reversed dictionary mapping indicator codes to names</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename the columns and convert all names to lowercase</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>df.rename(columns<span class="op">=</span><span class="kw">lambda</span> x: {v: k <span class="cf">for</span> k, v <span class="kw">in</span> indicators.items()}.get(x, x).lower(), inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort 'country' in ascending order</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.sort_values(<span class="st">'country'</span>, ascending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Reset the index after sorting</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the number of rows and columns</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.shape)</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first few rows of the data</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head(<span class="dv">3</span>))</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the data to a CSV file</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'wdi.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Exploratory Data Analysis</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>I will analyze the following three indicators from the dataset: 1. GDP per capita 2. Life expectancy 3. Health expenditure as % of GDP</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summary Statistics</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>Analysis of @tbl-summary-stats:</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>GDP per capita shows extremely wide variation, ranging from about \$251 to over \$226,000.</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The mean (\$21,076) is far higher than the median (\$7,656), indicating a right-skewed distribution. A few wealthy countries drive up the average while most economies have much lower income per person.</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The large standard deviation (\$30,994) confirms strong inequality in economic output across countries.</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Life expectancy values range from 18.8 years to 85.7 years, with a mean of about 73.1 years.</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The interquartile range (67.8 – 78.5) indicates that most countries cluster around 70–80 years.</span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The relatively small standard deviation (≈ 7.9) shows that life expectancy is less dispersed than income levels, reflecting global improvements in public health.</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Health expenditure GDP share ranges from 1.8% to 23%. </span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Distribution is moderately right-skewed: most countries spend ~4–9% of GDP on health; a small set spend &gt;10%, and a few outliers reach ~23%.</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-summary-stats</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Summary statistics for GPD/capita, life expectancy, and health expenditure (% of gdp)."</span></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="co"># Show summary statistics for our chosen indicators</span></span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'gdp_per_capita'</span>, <span class="st">'life_expectancy'</span>, <span class="st">'health_expenditure_gdp_share'</span>]].describe()</span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a><span class="fu">### Correlation Matrices</span></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>@tbl-correlations highlights the strength and direction of linear relationships among the three key indicators:</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>GDP per capita and life expectancy (r = 0.57): This is a moderately strong positive correlation. Countries with higher income/person tend to have longer average lifespans. This makes sense, as higher income levels typically correspond to better access to healthcare, nutrition, and education, all of which improve life expectancy.</span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>GDP per capita and health expenditure (r = 0.145): Weak positive relationship. This shows that richer countries do not necessarily spend a higher share of GDP on health. </span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Health expenditure and unemployment rate (r = 0.158):   Weakly positive. Countries that devote a larger share of GDP to health tend to have slightly higher life expectancy, but it’s far from a strong one-to-one relationship. Spending more doesn’t automatically translate to better outcomes.</span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>Economic wealth is the strongest driver of longevity (r ≈ 0.57).</span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>Health spending share has only a minor connection to both GDP and life expectancy.</span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>This suggests that quality and efficiency of healthcare matter more than the proportion of GDP allocated to it.</span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-correlations</span></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Correlation scores between GDP/capita, life expectancy, and health expenditure (% of gdp)."</span></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a><span class="co"># Show correlation matrices</span></span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'gdp_per_capita'</span>, <span class="st">'life_expectancy'</span>, <span class="st">'health_expenditure_gdp_share'</span>]].corr()</span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a><span class="fu">### Distributions</span></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-distributions</span></span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Distribution of indicators. Source: World Bank WDI (2022)."</span></span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">4</span>))</span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>sns.histplot(df[<span class="st">'gdp_per_capita'</span>], kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>], color<span class="op">=</span><span class="st">'skyblue'</span>)</span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'GDP per capita distribution'</span>)</span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a>sns.histplot(df[<span class="st">'life_expectancy'</span>], kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>], color<span class="op">=</span><span class="st">'lightgreen'</span>)</span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Life expectancy distribution'</span>)</span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a>sns.histplot(df[<span class="st">'health_expenditure_gdp_share'</span>], kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">2</span>], color<span class="op">=</span><span class="st">'salmon'</span>)</span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">2</span>].set_title(<span class="st">'Health Expenditure distribution'</span>)</span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a>As shown in @fig-distributions, GDP per capita is heavily skewed right, showing large wealth inequalities across countries. Unemployment rate is also skewed right, ranging from 0 to 35%. Life expectancy is the closest to being normally distributed with only a few small outliers below 50.</span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>GDP per capita distribution: Highly right-skewed — the vast majority of countries have relatively low GDP per capita, with a few extremely wealthy outliers (above $100,000). This reflects global income inequality.</span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Life expectancy distribution: Approximately normal, centered around 70–75 years, with slight left skew from a few low-life-expectancy countries (under 50 years). Outliers on the lower end may correspond to countries with conflict, poor healthcare access, or infectious diseases. This tighter, nearly symmetric distribution shows that health outcomes are less unequal than income — confirming a convergence in global life expectancy.</span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Health expenditure (% of GDP) distribution: Moderately right-skewed, concentrated between 3–10%, with some countries spending up to 20%+ of GDP on health. Most nations allocate a modest share of their economy to health. The skew suggests that some economies must spend disproportionately more to sustain health outcomes, while others achieve efficiency at lower cost.</span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Visualizations</span></span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pairwise</span></span>
+<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Pairwise relationships among GDP per capita, life expectancy, and health expenditure (% of GDP)."</span></span>
+<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a>sns.pairplot(df[[<span class="st">'gdp_per_capita'</span>, <span class="st">'life_expectancy'</span>, <span class="st">'health_expenditure_gdp_share'</span>]], diag_kind<span class="op">=</span><span class="st">'kde'</span>)</span>
+<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a>@fig-pairwise reinforces that GDP per capita is strongly and positively associated with life expectancy, while both indicators display only weak relationships with health expenditure as a share of GDP. The distributions along the diagonal highlight that income is highly skewed, whereas life expectancy and health spending are more evenly distributed across countries.</span>
+<span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-gdp-life</span></span>
+<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Relationship between GDP per capita and life expectancy. Source: World Bank WDI (2022)."</span></span>
+<span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">5</span>))</span>
+<span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a>sns.regplot(</span>
+<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df,</span>
+<span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"gdp_per_capita"</span>, </span>
+<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"life_expectancy"</span>,</span>
+<span id="cb2-202"><a href="#cb2-202" aria-hidden="true" tabindex="-1"></a>    scatter_kws<span class="op">=</span>{<span class="st">"alpha"</span>:<span class="fl">0.6</span>, <span class="st">"s"</span>:<span class="dv">40</span>, <span class="st">"color"</span>:<span class="st">"skyblue"</span>},</span>
+<span id="cb2-203"><a href="#cb2-203" aria-hidden="true" tabindex="-1"></a>    line_kws<span class="op">=</span>{<span class="st">"color"</span>:<span class="st">"darkblue"</span>, <span class="st">"linewidth"</span>:<span class="dv">2</span>}</span>
+<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-205"><a href="#cb2-205" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"GDP per Capita vs Life Expectancy"</span>)</span>
+<span id="cb2-206"><a href="#cb2-206" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"GDP per capita (current US$)"</span>)</span>
+<span id="cb2-207"><a href="#cb2-207" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Life expectancy (years)"</span>)</span>
+<span id="cb2-208"><a href="#cb2-208" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb2-209"><a href="#cb2-209" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb2-210"><a href="#cb2-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-211"><a href="#cb2-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-212"><a href="#cb2-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-213"><a href="#cb2-213" aria-hidden="true" tabindex="-1"></a>@fig-gdp-life shows an upward relationship between GDP per capita and life expectancy. Wealthier nations tend to have longer lifespans, though the relationship flattens for very high-income countries, suggesting diminishing returns from income on health outcomes.</span>
+<span id="cb2-214"><a href="#cb2-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-215"><a href="#cb2-215" aria-hidden="true" tabindex="-1"></a>This pattern directly reflects findings from McKinsey Global Institute’s “Pixels of Progress” report (2022), which notes that “an additional dollar of GDP per capita ‘buys’ more life expectancy at lower levels of income: the slope of the curve gets flatter as GDP per capita grows” <span class="co">[</span><span class="ot">@mckinsey_pixels_progress_ch3</span><span class="co">]</span>. </span>
+<span id="cb2-216"><a href="#cb2-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-217"><a href="#cb2-217" aria-hidden="true" tabindex="-1"></a>In other words, improvements in life expectancy are most dramatic in low- and middle-income economies where new income enables access to basic healthcare, sanitation, and nutrition. Once these needs are met, further increases in income yield smaller health gains, and longevity improvements depend more on innovation, public health policy, and system efficiency than on GDP growth alone.</span>
+<span id="cb2-218"><a href="#cb2-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb2-222"><a href="#cb2-222" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-health-clusters</span></span>
+<span id="cb2-223"><a href="#cb2-223" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Clusters of countries based on health expenditure (% of GDP) and life expectancy. Source: World Bank WDI (2022)."</span></span>
+<span id="cb2-224"><a href="#cb2-224" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-225"><a href="#cb2-225" aria-hidden="true" tabindex="-1"></a><span class="co"># Select relevant features and drop missing data</span></span>
+<span id="cb2-226"><a href="#cb2-226" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [<span class="st">'gdp_per_capita'</span>, <span class="st">'life_expectancy'</span>, <span class="st">'health_expenditure_gdp_share'</span>]</span>
+<span id="cb2-227"><a href="#cb2-227" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[features]</span>
+<span id="cb2-228"><a href="#cb2-228" aria-hidden="true" tabindex="-1"></a>valid <span class="op">=</span> X.dropna()</span>
+<span id="cb2-229"><a href="#cb2-229" aria-hidden="true" tabindex="-1"></a>valid_idx <span class="op">=</span> valid.index</span>
+<span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardize the data and fit KMeans (3 clusters)</span></span>
+<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> StandardScaler().fit_transform(valid)</span>
+<span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">3</span>, n_init<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> kmeans.fit_predict(X_scaled)</span>
+<span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-236"><a href="#cb2-236" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign clusters back to main df</span></span>
+<span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'cluster_health'</span>] <span class="op">=</span> pd.NA</span>
+<span id="cb2-238"><a href="#cb2-238" aria-hidden="true" tabindex="-1"></a>df.loc[valid_idx, <span class="st">'cluster_health'</span>] <span class="op">=</span> labels</span>
+<span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plotting subset</span></span>
+<span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a>plot_df <span class="op">=</span> df.loc[valid_idx].copy()</span>
+<span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a>plot_df[<span class="st">'cluster_health'</span>] <span class="op">=</span> plot_df[<span class="st">'cluster_health'</span>].astype(<span class="st">'int'</span>)</span>
+<span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot health expenditure vs life expectancy</span></span>
+<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.lmplot(</span>
+<span id="cb2-247"><a href="#cb2-247" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>plot_df,</span>
+<span id="cb2-248"><a href="#cb2-248" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"health_expenditure_gdp_share"</span>,</span>
+<span id="cb2-249"><a href="#cb2-249" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"life_expectancy"</span>,</span>
+<span id="cb2-250"><a href="#cb2-250" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"cluster_health"</span>,</span>
+<span id="cb2-251"><a href="#cb2-251" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span><span class="st">"Set2"</span>,</span>
+<span id="cb2-252"><a href="#cb2-252" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">6</span>,</span>
+<span id="cb2-253"><a href="#cb2-253" aria-hidden="true" tabindex="-1"></a>    aspect<span class="op">=</span><span class="fl">1.2</span>,</span>
+<span id="cb2-254"><a href="#cb2-254" aria-hidden="true" tabindex="-1"></a>    scatter_kws<span class="op">=</span>{<span class="st">"alpha"</span>:<span class="fl">0.7</span>, <span class="st">"s"</span>:<span class="dv">60</span>},</span>
+<span id="cb2-255"><a href="#cb2-255" aria-hidden="true" tabindex="-1"></a>    line_kws<span class="op">=</span>{<span class="st">"linewidth"</span>:<span class="dv">2</span>}</span>
+<span id="cb2-256"><a href="#cb2-256" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-257"><a href="#cb2-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-258"><a href="#cb2-258" aria-hidden="true" tabindex="-1"></a><span class="co"># Highlight and label the United States</span></span>
+<span id="cb2-259"><a href="#cb2-259" aria-hidden="true" tabindex="-1"></a>usa <span class="op">=</span> df[df[<span class="st">'country'</span>] <span class="op">==</span> <span class="st">'United States'</span>]</span>
+<span id="cb2-260"><a href="#cb2-260" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> usa.empty:</span>
+<span id="cb2-261"><a href="#cb2-261" aria-hidden="true" tabindex="-1"></a>    plt.scatter(</span>
+<span id="cb2-262"><a href="#cb2-262" aria-hidden="true" tabindex="-1"></a>        usa[<span class="st">'health_expenditure_gdp_share'</span>],</span>
+<span id="cb2-263"><a href="#cb2-263" aria-hidden="true" tabindex="-1"></a>        usa[<span class="st">'life_expectancy'</span>],</span>
+<span id="cb2-264"><a href="#cb2-264" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">'red'</span>,</span>
+<span id="cb2-265"><a href="#cb2-265" aria-hidden="true" tabindex="-1"></a>        s<span class="op">=</span><span class="dv">120</span>,</span>
+<span id="cb2-266"><a href="#cb2-266" aria-hidden="true" tabindex="-1"></a>        edgecolor<span class="op">=</span><span class="st">'black'</span>,</span>
+<span id="cb2-267"><a href="#cb2-267" aria-hidden="true" tabindex="-1"></a>        zorder<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb2-268"><a href="#cb2-268" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">"United States"</span></span>
+<span id="cb2-269"><a href="#cb2-269" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-270"><a href="#cb2-270" aria-hidden="true" tabindex="-1"></a>    plt.text(</span>
+<span id="cb2-271"><a href="#cb2-271" aria-hidden="true" tabindex="-1"></a>        usa[<span class="st">'health_expenditure_gdp_share'</span>].values[<span class="dv">0</span>] <span class="op">+</span> <span class="fl">0.3</span>,</span>
+<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a>        usa[<span class="st">'life_expectancy'</span>].values[<span class="dv">0</span>] <span class="op">+</span> <span class="fl">0.3</span>,</span>
+<span id="cb2-273"><a href="#cb2-273" aria-hidden="true" tabindex="-1"></a>        <span class="st">"USA"</span>,</span>
+<span id="cb2-274"><a href="#cb2-274" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">'black'</span>,</span>
+<span id="cb2-275"><a href="#cb2-275" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb2-276"><a href="#cb2-276" aria-hidden="true" tabindex="-1"></a>        weight<span class="op">=</span><span class="st">'bold'</span></span>
+<span id="cb2-277"><a href="#cb2-277" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-278"><a href="#cb2-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Health Expenditure vs Life Expectancy by Cluster"</span>)</span>
+<span id="cb2-280"><a href="#cb2-280" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Health Expenditure (</span><span class="sc">% o</span><span class="st">f GDP)"</span>)</span>
+<span id="cb2-281"><a href="#cb2-281" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Life Expectancy (years)"</span>)</span>
+<span id="cb2-282"><a href="#cb2-282" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb2-283"><a href="#cb2-283" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb2-284"><a href="#cb2-284" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb2-285"><a href="#cb2-285" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-286"><a href="#cb2-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-287"><a href="#cb2-287" aria-hidden="true" tabindex="-1"></a>@fig-health-clusters, a clustered regression plot, illustrates that the relationship between health expenditure (% of GDP) and life expectancy differs across groups of countries, reflecting disparities in health system efficiency and economic capacity.</span>
+<span id="cb2-288"><a href="#cb2-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-289"><a href="#cb2-289" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Cluster 1 (orange) — High-income, efficient systems:</span>
+<span id="cb2-290"><a href="#cb2-290" aria-hidden="true" tabindex="-1"></a>These countries exhibit very high life expectancy (~80–85 years) despite moderate health spending (5–10% of GDP). This aligns with evidence from Our World in Data (2024), which shows that once nations surpass a certain threshold of per capita income, returns to health spending plateau. <span class="co">[</span><span class="ot">@ourworldindata_life_expectancy_vs_health_expenditure</span><span class="co">]</span> Improvements in longevity depend more on social determinants like education and preventive care than on spending alone.</span>
+<span id="cb2-291"><a href="#cb2-291" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Among the orange cluster, the USA is a clear outlier, achieving below average life expectancy for the cluster despite having the highest health expenditure as % of gdp of the cluster and the 4th highest overall. This suports evidence from Our World in Data (2020), which examines why life expectancy in the US is lower than in other rich countries. <span class="co">[</span><span class="ot">@ourworldindata_us_life_expectancy</span><span class="co">]</span></span>
+<span id="cb2-292"><a href="#cb2-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-293"><a href="#cb2-293" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Cluster 0 (green) — Middle-income, developing systems:</span>
+<span id="cb2-294"><a href="#cb2-294" aria-hidden="true" tabindex="-1"></a>The positive slope indicates that higher spending continues to yield incremental gains in life expectancy. </span>
+<span id="cb2-295"><a href="#cb2-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-296"><a href="#cb2-296" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Cluster 2 (blue) — Low-income or inefficient systems:</span>
+<span id="cb2-297"><a href="#cb2-297" aria-hidden="true" tabindex="-1"></a>These nations spend a larger share of GDP (10–20%) on healthcare but still face lower life expectancy (~50–70 years). </span>
+<span id="cb2-298"><a href="#cb2-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-299"><a href="#cb2-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-300"><a href="#cb2-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-301"><a href="#cb2-301" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. Key Statistics</span></span>
+<span id="cb2-304"><a href="#cb2-304" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb2-305"><a href="#cb2-305" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-usa-comparison</span></span>
+<span id="cb2-306"><a href="#cb2-306" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Comparison of the United States with global and high-income averages. Source: World Bank WDI (2022)."</span></span>
+<span id="cb2-307"><a href="#cb2-307" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-308"><a href="#cb2-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-309"><a href="#cb2-309" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify high-income group (top 20% by GDP per capita)</span></span>
+<span id="cb2-310"><a href="#cb2-310" aria-hidden="true" tabindex="-1"></a>threshold <span class="op">=</span> df[<span class="st">'gdp_per_capita'</span>].quantile(<span class="fl">0.8</span>)</span>
+<span id="cb2-311"><a href="#cb2-311" aria-hidden="true" tabindex="-1"></a>high_income <span class="op">=</span> df[df[<span class="st">'gdp_per_capita'</span>] <span class="op">&gt;=</span> threshold]</span>
+<span id="cb2-312"><a href="#cb2-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-313"><a href="#cb2-313" aria-hidden="true" tabindex="-1"></a><span class="co"># U.S. subset</span></span>
+<span id="cb2-314"><a href="#cb2-314" aria-hidden="true" tabindex="-1"></a>usa <span class="op">=</span> df[df[<span class="st">'country'</span>] <span class="op">==</span> <span class="st">'United States'</span>]</span>
+<span id="cb2-315"><a href="#cb2-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-316"><a href="#cb2-316" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute summary comparisons</span></span>
+<span id="cb2-317"><a href="#cb2-317" aria-hidden="true" tabindex="-1"></a>comparison <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb2-318"><a href="#cb2-318" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Indicator'</span>: [<span class="st">'GDP per capita (US$)'</span>, <span class="st">'Life expectancy (years)'</span>, <span class="st">'Health expenditure (</span><span class="sc">% o</span><span class="st">f GDP)'</span>],</span>
+<span id="cb2-319"><a href="#cb2-319" aria-hidden="true" tabindex="-1"></a>    <span class="st">'United States'</span>: [</span>
+<span id="cb2-320"><a href="#cb2-320" aria-hidden="true" tabindex="-1"></a>        usa[<span class="st">'gdp_per_capita'</span>].values[<span class="dv">0</span>],</span>
+<span id="cb2-321"><a href="#cb2-321" aria-hidden="true" tabindex="-1"></a>        usa[<span class="st">'life_expectancy'</span>].values[<span class="dv">0</span>],</span>
+<span id="cb2-322"><a href="#cb2-322" aria-hidden="true" tabindex="-1"></a>        usa[<span class="st">'health_expenditure_gdp_share'</span>].values[<span class="dv">0</span>]</span>
+<span id="cb2-323"><a href="#cb2-323" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb2-324"><a href="#cb2-324" aria-hidden="true" tabindex="-1"></a>    <span class="st">'High-income avg'</span>: [</span>
+<span id="cb2-325"><a href="#cb2-325" aria-hidden="true" tabindex="-1"></a>        high_income[<span class="st">'gdp_per_capita'</span>].mean(),</span>
+<span id="cb2-326"><a href="#cb2-326" aria-hidden="true" tabindex="-1"></a>        high_income[<span class="st">'life_expectancy'</span>].mean(),</span>
+<span id="cb2-327"><a href="#cb2-327" aria-hidden="true" tabindex="-1"></a>        high_income[<span class="st">'health_expenditure_gdp_share'</span>].mean()</span>
+<span id="cb2-328"><a href="#cb2-328" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb2-329"><a href="#cb2-329" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Global avg'</span>: [</span>
+<span id="cb2-330"><a href="#cb2-330" aria-hidden="true" tabindex="-1"></a>        df[<span class="st">'gdp_per_capita'</span>].mean(),</span>
+<span id="cb2-331"><a href="#cb2-331" aria-hidden="true" tabindex="-1"></a>        df[<span class="st">'life_expectancy'</span>].mean(),</span>
+<span id="cb2-332"><a href="#cb2-332" aria-hidden="true" tabindex="-1"></a>        df[<span class="st">'health_expenditure_gdp_share'</span>].mean()</span>
+<span id="cb2-333"><a href="#cb2-333" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb2-334"><a href="#cb2-334" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-335"><a href="#cb2-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-336"><a href="#cb2-336" aria-hidden="true" tabindex="-1"></a>comparison <span class="op">=</span> comparison.<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb2-337"><a href="#cb2-337" aria-hidden="true" tabindex="-1"></a>comparison.style.hide(axis<span class="op">=</span><span class="st">'index'</span>).<span class="bu">format</span>({</span>
+<span id="cb2-338"><a href="#cb2-338" aria-hidden="true" tabindex="-1"></a>    <span class="st">'United States'</span>: <span class="st">'</span><span class="sc">{:,.2f}</span><span class="st">'</span>,</span>
+<span id="cb2-339"><a href="#cb2-339" aria-hidden="true" tabindex="-1"></a>    <span class="st">'High-income avg (top 20%)'</span>: <span class="st">'</span><span class="sc">{:,.2f}</span><span class="st">'</span>,</span>
+<span id="cb2-340"><a href="#cb2-340" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Global avg'</span>: <span class="st">'</span><span class="sc">{:,.2f}</span><span class="st">'</span></span>
+<span id="cb2-341"><a href="#cb2-341" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-342"><a href="#cb2-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-343"><a href="#cb2-343" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-344"><a href="#cb2-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-345"><a href="#cb2-345" aria-hidden="true" tabindex="-1"></a>The data in @tbl-usa-comparison highlight a paradox in the relationship between national wealth, health spending, and longevity. Despite being among the richest nations in the world, the United States underperforms in life expectancy relative to both its peers and its spending levels. </span>
+<span id="cb2-346"><a href="#cb2-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-347"><a href="#cb2-347" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>GDP per capita (US$)</span>
+<span id="cb2-348"><a href="#cb2-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-349"><a href="#cb2-349" aria-hidden="true" tabindex="-1"></a>The United States’ GDP per capita of $77,861 surpasses the high-income average ($69,255) by roughly 12% and exceeds the global average ($21,077) by more than 270%.</span>
+<span id="cb2-350"><a href="#cb2-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-351"><a href="#cb2-351" aria-hidden="true" tabindex="-1"></a>This confirms the USA's position as a global economic leader, with more than enough financial capacity to fund universal and advanced healthcare systems.</span>
+<span id="cb2-352"><a href="#cb2-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-353"><a href="#cb2-353" aria-hidden="true" tabindex="-1"></a>However, as seen in @fig-gdp-life, additional gains in income among already wealthy nations yield diminishing improvements in life expectancy, a phenomenon noted in the McKinsey Global Institute’s Pixels of Progress (2022) report. The U.S. has entered this “flat zone” of that curve, where marginal income gains no longer substantially extend life expectancy.</span>
+<span id="cb2-354"><a href="#cb2-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-355"><a href="#cb2-355" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Life expectancy (years)</span>
+<span id="cb2-356"><a href="#cb2-356" aria-hidden="true" tabindex="-1"></a>U.S. life expectancy stands at 77.43 years, which is 3.85 years below the high-income average (81.28 years) and only 4.3 years above the global mean (73.11 years).</span>
+<span id="cb2-357"><a href="#cb2-357" aria-hidden="true" tabindex="-1"></a>This modest edge over the global average despite massive wealth underscores inefficiency in translating resources into health outcomes.</span>
+<span id="cb2-358"><a href="#cb2-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-359"><a href="#cb2-359" aria-hidden="true" tabindex="-1"></a>In @fig-health-clusters, the United States appears as a clear outlier within the high-income (orange) group: It lies to the far right (highest spending), but below the cluster’s regression line, showing lower-than-expected longevity given its economic and health investment levels.</span>
+<span id="cb2-360"><a href="#cb2-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-361"><a href="#cb2-361" aria-hidden="true" tabindex="-1"></a>This mirrors Our World in Data (2024) findings showing that the United States spends more yet achieves less in life expectancy than its peers. </span>
+<span id="cb2-362"><a href="#cb2-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-363"><a href="#cb2-363" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Health expenditure (% of GDP)</span>
+<span id="cb2-364"><a href="#cb2-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-365"><a href="#cb2-365" aria-hidden="true" tabindex="-1"></a>The United States spends 16.5% of GDP on healthcare, nearly double the high-income average (8.4%) and more than twice the global average (6.9%). However, this disproportionate spending does not produce better outcomes which may imply poor effectiveness of healthcare spending.</span>
+<span id="cb2-366"><a href="#cb2-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-367"><a href="#cb2-367" aria-hidden="true" tabindex="-1"></a>Research from Our World in Data (2024) emphasizes that once countries surpass roughly $5,000–$10,000 GDP per capita, further health gains depend less on spending volume and more on efficiency, equity, and public health infrastructure, explaining why the U.S. underperforms relative to its investment.</span>
+<span id="cb2-368"><a href="#cb2-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-369"><a href="#cb2-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-370"><a href="#cb2-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-371"><a href="#cb2-371" aria-hidden="true" tabindex="-1"></a>-------</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
