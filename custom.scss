@@ -20,3 +20,13 @@ $presentation-heading-color: #383d3d !default;
 .reveal a {
   line-height: 1.3em;
 }
+
+/* ---- Slide layout adjustments ---- */
+.reveal {
+  font-size: 0.9em;  // smaller global text
+  zoom: 0.9;         // slightly zoomed out overall
+}
+
+.reveal .slides {
+  max-width: 90% !important; // prevent slide content from touching edges
+}
