@@ -2,11 +2,11 @@
 
 /* ---- Fonts ---- */
 
-// Title font (only top-level presentation title)
+// Titles and headings -> Palatino
 $presentation-title-font: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif !default;
+$presentation-heading-font: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif !default;
 
-// Headings, body, and code use Helvetica
-$presentation-heading-font: "Helvetica", "Arial", sans-serif !default;
+// Body and code -> Helvetica
 $body-font-family: "Helvetica", "Arial", sans-serif !default;
 $code-font-family: "Helvetica", "Arial", sans-serif !default;
 
@@ -29,7 +29,7 @@ $presentation-heading-color: #383d3d !default;
 
 /* ---- Typography rules ---- */
 
-/* Body + regular text -> Helvetica */
+/* Body text, bullets, and small text -> Helvetica */
 .reveal p,
 .reveal li,
 .reveal span,
@@ -37,7 +37,7 @@ $presentation-heading-color: #383d3d !default;
   font-family: "Helvetica", "Arial", sans-serif !important;
 }
 
-/* Tables + figure text -> Palatino */
+/* Tables + figure captions -> Palatino for consistency */
 .reveal table,
 .reveal th,
 .reveal td,
@@ -49,7 +49,7 @@ $presentation-heading-color: #383d3d !default;
   color: #000;
 }
 
-/* Title slide (main h1) -> Palatino */
+/* Title slide main heading (big title) -> Palatino */
 .reveal .title-slide h1 {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif !important;
   font-size: 2.4em;
@@ -57,12 +57,12 @@ $presentation-heading-color: #383d3d !default;
   color: #383d3d;
 }
 
-/* Subheadings (all other headings) -> Helvetica */
-.reveal h1:not(.title),
+/* Slide titles and headings -> Palatino */
+.reveal h1,
 .reveal h2,
 .reveal h3,
 .reveal h4 {
-  font-family: "Helvetica", "Arial", sans-serif !important;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif !important;
   color: #383d3d;
 }
 
@@ -77,9 +77,9 @@ $presentation-heading-color: #383d3d !default;
   line-height: 2.0em;
 }
 
-/* ---- Slide layout adjustments ---- */
+/* ---- Layout adjustments ---- */
 .reveal {
-  font-size: 1.5em;  // keep same text sizing as before
+  font-size: 1.5em;  // keep same global size
 }
 
 .reveal .slides {
