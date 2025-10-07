@@ -35,7 +35,9 @@ jupyter: python3
 
 We analyze three core indicators:  
 - GDP per Capita (US$) 
+
 - Life Expectancy (years)
+
 - Healthcare Expenditure (% of GDP)
 
 ```{python}
@@ -125,8 +127,8 @@ df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']].corr()
 ```{python}
 #| label: fig-pairwise
 #| fig-cap: "Pairwise relationships among GDP per capita, life expectancy, and health expenditure (% of GDP)."
-#| fig-width: 3.0
-#| fig-height: 3.0
+#| fig-width: 2.5
+#| fig-height: 2.5
 #| echo: false
 plt.close('all')
 sns.pairplot(df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']], diag_kind='kde')
