@@ -127,7 +127,7 @@ The distributions along the diagonal highlight that income is highly skewed, whe
 #| fig-width: 5
 #| fig-height: 5
 #| echo: false
-
+plt.close('all')
 sns.pairplot(df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']], diag_kind='kde')
 ```
 ::: 
@@ -150,9 +150,7 @@ sns.pairplot(df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_sh
 #| fig-cap: "Relationship between GDP per capita and life expectancy. Source: World Bank WDI (2023)."
 #| echo: false
 
-import seaborn as sns
-import matplotlib.pyplot as plt
-
+plt.close('all')
 sns.set(style="whitegrid")
 
 plt.figure(figsize=(7,5))
@@ -194,6 +192,7 @@ Overall: The relationship between health spending and life expectancy varies acr
 #| fig-cap: "Clusters of countries based on health expenditure (% of GDP) and life expectancy. Source: World Bank WDI (2023)."
 #| echo: false
 # Select relevant features and drop missing data
+plt.close('all')
 features = ['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']
 X = df[features]
 valid = X.dropna()
