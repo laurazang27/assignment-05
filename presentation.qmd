@@ -18,11 +18,6 @@ execute:
 bibliography: refs.bib
 jupyter: python3
 ---
-## Title Slide
-
-### Exploring Global Development Indicators  
-**Data Source:** World Bank (2023)  
-**Prepared by:** Laura Zang
 
 ## Agenda
 
@@ -131,7 +126,11 @@ df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']].corr()
 #| fig-height: 2.5
 #| echo: false
 plt.close('all')
-sns.pairplot(df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']], diag_kind='kde')
+sns.pairplot(
+    df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']],
+    diag_kind='kde',
+    height=2.0
+)
 ```
 :::
 :::
