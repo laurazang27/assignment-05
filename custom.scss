@@ -1,58 +1,87 @@
 /*-- scss:defaults --*/
 
+/* ---- Fonts ---- */
+
 // Title font (only top-level presentation title)
 $presentation-title-font: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif !default;
 
-// Everything else uses Helvetica
+// Headings, body, and code use Helvetica
 $presentation-heading-font: "Helvetica", "Arial", sans-serif !default;
 $body-font-family: "Helvetica", "Arial", sans-serif !default;
 $code-font-family: "Helvetica", "Arial", sans-serif !default;
 
+/* ---- Colors ---- */
+$body-bg: #ebeafb !default;
+$body-color: #000 !default;
+$link-color: #312295 !default;
+$selection-bg: #26351c !default;
+$presentation-heading-color: #383d3d !default;
+
+/* ---- Reveal.js color variables ---- */
+:root {
+  --r-background-color: #ebeafb;
+  --r-main-color: #000;
+  --r-link-color: #312295;
+  --r-heading-color: #383d3d;
+}
+
 /*-- scss:rules --*/
 
+/* ---- Typography rules ---- */
+
+/* Body + regular text -> Helvetica */
 .reveal p,
 .reveal li,
-.reveal table,
-.reveal figcaption,
 .reveal span,
 .reveal small {
   font-family: "Helvetica", "Arial", sans-serif !important;
 }
 
+/* Tables + figure text -> Palatino */
+.reveal table,
+.reveal th,
+.reveal td,
+.reveal figcaption,
+.reveal .figure,
+.reveal .table caption {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif !important;
+  font-size: 0.95em;
+  color: #000;
+}
+
+/* Title slide (main h1) -> Palatino */
 .reveal .title-slide h1 {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif !important;
   font-size: 2.4em;
   font-weight: bold;
+  color: #383d3d;
 }
 
+/* Subheadings (all other headings) -> Helvetica */
 .reveal h1:not(.title),
 .reveal h2,
 .reveal h3,
 .reveal h4 {
   font-family: "Helvetica", "Arial", sans-serif !important;
+  color: #383d3d;
 }
 
-// colors
-$body-bg: #ebeafb !default;
-$body-color: #000 !default;
-$link-color: #312295 !default;
-$selection-bg: #26351c !default;
-
-// headings
-$presentation-heading-font: "Palatino Linotype", "Book Antiqua", Palatino,
-  FreeSerif, serif !default;
-$presentation-heading-color: #383d3d !default;
-
+/* ---- Colors + Links ---- */
+.reveal {
+  background-color: #ebeafb;
+  color: #000;
+}
 
 .reveal a {
+  color: #312295 !important;
   line-height: 2.0em;
 }
 
 /* ---- Slide layout adjustments ---- */
 .reveal {
-  font-size: 1.5em;  // smaller global text         // slightly zoomed out overall
+  font-size: 1.5em;  // keep same text sizing as before
 }
 
 .reveal .slides {
-  max-width: 90% !important; // prevent slide content from touching edges
+  max-width: 90% !important; // prevent content from touching edges
 }
