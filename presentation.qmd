@@ -125,8 +125,8 @@ df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']].corr()
 ```{python}
 #| label: fig-pairwise
 #| fig-cap: "Pairwise relationships among GDP per capita, life expectancy, and health expenditure (% of GDP)."
-#| fig-width: 3.5
-#| fig-height: 3.5
+#| fig-width: 3.0
+#| fig-height: 3.0
 #| echo: false
 plt.close('all')
 sns.pairplot(df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']], diag_kind='kde')
@@ -138,7 +138,7 @@ sns.pairplot(df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_sh
 
 :::: {.columns}
 
-::: {.column width="40%"}
+::: {.column width="50%"}
 
 - This graph shows an upward relationship between GDP per capita and life expectancy. Wealthier nations tend to have longer lifespans, though the relationship flattens for very high-income countries.
 
@@ -148,7 +148,7 @@ sns.pairplot(df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_sh
 
 :::
 
-::: {.column width="60%"}
+::: {.column width="50%"}
 ```{python}
 #| label: fig-gdp-life
 #| fig-cap: "Relationship between GDP per capita and life expectancy. Source: World Bank WDI (2023)."
@@ -333,7 +333,7 @@ comparison.style.hide(axis='index').format({
 
 - **The U.S. paradox:**
   - The United States exemplifies inefficiency — spending 16.5% of GDP on healthcare yet ranking below peers in life expectancy.
-  - Confirms findings from McKinsey (2023) and Our World in Data (2024) that system efficiency, equity, and innovation are now the main drivers of health gains, not wealth alone. [@mckinsey_pixels_progress_ch3] [ourworldindata_life_expectancy_vs_health_expenditure] [ourworldindata_us_life_expectancy]
+  - Confirms findings from McKinsey (2023) and Our World in Data (2024) that system efficiency, equity, and innovation are now the main drivers of health gains, not wealth alone. [@mckinsey_pixels_progress_ch3] [@ourworldindata_life_expectancy_vs_health_expenditure] [@ourworldindata_us_life_expectancy]
 
 - *Economic growth enables better health, but only when paired with efficient, equitable, and innovative healthcare systems.*
 
