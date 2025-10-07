@@ -116,17 +116,17 @@ df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']].corr()
 :::: {.columns}
 
 ::: {.column width="40%"}
-GDP per capita is strongly and positively associated with life expectancy, while both indicators display only weak relationships with health expenditure as a share of GDP.  
+- GDP per capita is strongly and positively associated with life expectancy, while both indicators display only weak relationships with health expenditure as a share of GDP.  
 
-The distributions along the diagonal highlight that income is highly skewed, whereas life expectancy and health spending are more evenly distributed across countries.
+- The distributions along the diagonal highlight that income is highly skewed, whereas life expectancy and health spending are more evenly distributed across countries.
 :::
 
 ::: {.column width="60%"}
 ```{python}
 #| label: fig-pairwise
 #| fig-cap: "Pairwise relationships among GDP per capita, life expectancy, and health expenditure (% of GDP)."
-#| fig-width: 5
-#| fig-height: 5
+#| fig-width: 4
+#| fig-height: 4
 #| echo: false
 plt.close('all')
 sns.pairplot(df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']], diag_kind='kde')

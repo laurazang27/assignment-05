@@ -1,8 +1,36 @@
 /*-- scss:defaults --*/
 
-// fonts
-$font-family-sans-serif: "Palatino Linotype", "Book Antiqua", Palatino,
-  FreeSerif, serif !default;
+// Title font (only top-level presentation title)
+$presentation-title-font: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif !default;
+
+// Everything else uses Helvetica
+$presentation-heading-font: "Helvetica", "Arial", sans-serif !default;
+$body-font-family: "Helvetica", "Arial", sans-serif !default;
+$code-font-family: "Helvetica", "Arial", sans-serif !default;
+
+/*-- scss:rules --*/
+
+.reveal p,
+.reveal li,
+.reveal table,
+.reveal figcaption,
+.reveal span,
+.reveal small {
+  font-family: "Helvetica", "Arial", sans-serif !important;
+}
+
+.reveal .title-slide h1 {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif !important;
+  font-size: 2.4em;
+  font-weight: bold;
+}
+
+.reveal h1:not(.title),
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  font-family: "Helvetica", "Arial", sans-serif !important;
+}
 
 // colors
 $body-bg: #ebeafb !default;
@@ -15,10 +43,9 @@ $presentation-heading-font: "Palatino Linotype", "Book Antiqua", Palatino,
   FreeSerif, serif !default;
 $presentation-heading-color: #383d3d !default;
 
-/*-- scss:rules --*/
 
 .reveal a {
-  line-height: 1.3em;
+  line-height: 2.0em;
 }
 
 /* ---- Slide layout adjustments ---- */
