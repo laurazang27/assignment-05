@@ -122,6 +122,8 @@ The distributions along the diagonal highlight that income is highly skewed, whe
 ```{python}
 #| label: fig-pairwise
 #| fig-cap: "Pairwise relationships among GDP per capita, life expectancy, and health expenditure (% of GDP)."
+#| fig-width: 5
+#| fig-height: 5
 #| echo: false
 
 sns.pairplot(df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']], diag_kind='kde')
