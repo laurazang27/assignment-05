@@ -120,6 +120,7 @@ GDP per capita is strongly and positively associated with life expectancy, while
 
 The distributions along the diagonal highlight that income is highly skewed, whereas life expectancy and health spending are more evenly distributed across countries.
 :::
+
 ::: column
 ```{python}
 #| label: fig-pairwise
@@ -130,6 +131,7 @@ The distributions along the diagonal highlight that income is highly skewed, whe
 plt.close('all')
 sns.pairplot(df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']], diag_kind='kde')
 ```
+
 ::: 
 :::
 
@@ -168,6 +170,7 @@ plt.tight_layout()
 plt.show()
 
 ```
+
 :::
 :::
 
