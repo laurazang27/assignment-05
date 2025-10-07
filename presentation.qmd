@@ -274,9 +274,9 @@ The U.S. Healthcare Paradox:
 
 - Diminishing returns: Reflecting McKinsey (2023), further income growth yields smaller health gains once basic needs are met.
 
-- High spending, low efficiency: The U.S. spends 16.5% of GDP on healthcare—about double the high-income average—but life expectancy (77.4 years) lags nearly four years behind. [ourworldindata_us_life_expectancy]
+- High spending, low efficiency: The U.S. spends 16.5% of GDP on healthcare—about double the high-income average—but life expectancy (77.4 years) lags nearly four years behind. 
 
-- Outlier status: As shown in @fig-health-clusters, the U.S. stands out as an inefficient system, supporting Our World in Data (2024) findings that efficiency and equity, not spending volume, drive future health improvements. [ourworldindata_life_expectancy_vs_health_expenditure]
+- Outlier status: As shown in @fig-health-clusters, the U.S. stands out as an inefficient system, supporting Our World in Data (2024) findings that efficiency and equity, not spending volume, drive future health improvements. 
 
 
 ```{python}
@@ -333,7 +333,7 @@ comparison.style.hide(axis='index').format({
 
 - **The U.S. paradox:**
   - The United States exemplifies inefficiency — spending 16.5% of GDP on healthcare yet ranking below peers in life expectancy.
-  - Confirms findings from McKinsey (2023) and Our World in Data (2024) that system efficiency, equity, and innovation are now the main drivers of health gains, not wealth alone. [@mckinsey_pixels_progress_ch3]
+  - Confirms findings from McKinsey (2023) and Our World in Data (2024) that system efficiency, equity, and innovation are now the main drivers of health gains, not wealth alone. [@mckinsey_pixels_progress_ch3] [ourworldindata_life_expectancy_vs_health_expenditure] [ourworldindata_us_life_expectancy]
 
 - *Economic growth enables better health, but only when paired with efficient, equitable, and innovative healthcare systems.*
 
@@ -342,3 +342,4 @@ comparison.style.hide(axis='index').format({
 
 ::: {#refs}
 :::
+
