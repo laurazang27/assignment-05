@@ -45,7 +45,7 @@ $presentation-heading-color: #383d3d !default;
 .reveal .figure,
 .reveal .table caption {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif !important;
-  font-size: 0.95em;
+  font-size: 1em;
   color: #000;
 }
 
@@ -79,7 +79,7 @@ $presentation-heading-color: #383d3d !default;
 
 /* ---- Layout adjustments ---- */
 .reveal {
-  font-size: 1.5em;  // keep same global size
+  font-size: 1.3em;  // keep same global size
 }
 
 .reveal .slides {
@@ -90,7 +90,7 @@ $presentation-heading-color: #383d3d !default;
 
 /* Global line height (affects all body text) */
 .reveal {
-  line-height: 1.6 !important;  /* default ~1.3–1.4; try 1.6–1.8 for more breathing room */
+  line-height: 1.5 !important;  /* default ~1.3–1.4; try 1.6–1.8 for more breathing room */
 }
 
 /* Paragraphs only */
@@ -101,7 +101,7 @@ $presentation-heading-color: #383d3d !default;
 
 /* List items (so bullet points aren’t too tight) */
 .reveal li {
-  line-height: 1.6 !important;
+  line-height: 1.5 !important;
   margin-bottom: 0.4em;
 }
 
