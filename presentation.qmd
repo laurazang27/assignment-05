@@ -12,7 +12,6 @@ format:
     toc: false
     width: 1280
     height: 720
-    scroll: true
 footer: "© 2025 Laura Zang • Data: World Bank WDI"
 execute:
   echo: false
@@ -112,16 +111,13 @@ This suggests that quality and efficiency of healthcare matter more than the pro
 df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']].corr()
 ```
 
-::: columns
-::: column
+
 ## Pairwise Relationships
 
 GDP per capita is strongly and positively associated with life expectancy, while both indicators display only weak relationships with health expenditure as a share of GDP.  
 
 The distributions along the diagonal highlight that income is highly skewed, whereas life expectancy and health spending are more evenly distributed across countries.
-:::
 
-::: column
 ```{python}
 #| label: fig-pairwise
 #| fig-cap: "Pairwise relationships among GDP per capita, life expectancy, and health expenditure (% of GDP)."
@@ -132,11 +128,7 @@ plt.close('all')
 sns.pairplot(df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_share']], diag_kind='kde')
 ```
 
-::: 
-:::
 
-::: columns
-::: column
 ## GDP vs. Life Expectancy
 
 - This graph shows an upward relationship between GDP per capita and life expectancy. Wealthier nations tend to have longer lifespans, though the relationship flattens for very high-income countries, suggesting diminishing returns from income on health outcomes.
@@ -144,8 +136,7 @@ sns.pairplot(df[['gdp_per_capita', 'life_expectancy', 'health_expenditure_gdp_sh
 - This pattern directly reflects findings from McKinsey Global Institute’s “Pixels of Progress” report (2022), which notes that “an additional dollar of GDP per capita ‘buys’ more life expectancy at lower levels of income: the slope of the curve gets flatter as GDP per capita grows”. 
 
 - Improvements in life expectancy are most dramatic in low- and middle-income economies where new income enables access to basic healthcare, sanitation, and nutrition. Once these needs are met, further increases in income yield smaller health gains, and longevity improvements depend more on other factors.
-:::
-::: column
+
 
 ```{python}
 #| label: fig-gdp-life
@@ -171,11 +162,7 @@ plt.show()
 
 ```
 
-:::
-:::
 
-::: columns
-::: column
 ## Health Expenditure vs. Life Expectancy (Clusters)
 
 Overall: The relationship between health spending and life expectancy varies across country clusters, reflecting differences in health system efficiency. 
@@ -187,8 +174,6 @@ Overall: The relationship between health spending and life expectancy varies acr
 
 - Cluster 2 (blue): Low-income or inefficient systems that spend more (10–20 % of GDP) yet achieve shorter lifespans (~50–70 yrs).
 
-:::
-::: column
 
 ```{python}
 #| label: fig-health-clusters
@@ -257,8 +242,6 @@ plt.tight_layout()
 plt.show()
 ```
 
-:::
-:::
 
 ## Key Statistics
 
