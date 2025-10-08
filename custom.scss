@@ -30,20 +30,20 @@ $presentation-heading-color: #383d3d !default;
 /* Make all tables fit slides better */
 
 .reveal table {
-  width: 70% !important;       /* was 80% — slightly narrower */
-  margin: 0 auto !important;   /* center on slide */
-  font-size: 0.8em !important; /* smaller text for better fit */
+  width: 60% !important;       /* narrower table */
+  margin: 0 auto !important;   /* centered on slide */
+  font-size: 0.7em !important; /* smaller text */
 }
 
 .reveal th, .reveal td {
-  padding: 4px 6px !important; /* tighter padding */
+  padding: 3px 5px !important; /* tighter spacing */
 }
 
 .reveal caption {
-  font-size: 0.75em;
+  font-size: 0.7em;
   font-style: italic;
   color: #333;
-  margin-top: 0.5em;
+  margin-top: 0.4em;
 }
 
 
