@@ -30,11 +30,9 @@ jupyter: python3
 
 We analyze three core indicators:  
 
-- GDP per Capita (US$) 
-
-- Life Expectancy (years)
-
-- Healthcare Expenditure (% of GDP)
+-  GDP per Capita (US$) 
+-  Life Expectancy (years)
+-  Healthcare Expenditure (% of GDP)
 
 ```{python}
 #| label: setup
