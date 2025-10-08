@@ -29,6 +29,7 @@ jupyter: python3
 ## Data Overview
 
 We analyze three core indicators:  
+
 - GDP per Capita (US$) 
 
 - Life Expectancy (years)

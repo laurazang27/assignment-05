@@ -27,6 +27,18 @@ $presentation-heading-color: #383d3d !default;
 
 /*-- scss:rules --*/
 
+/* Make all tables fit slides better */
+.reveal table {
+  width: 80% !important;      /* shrink width */
+  margin: 0 auto !important;  /* center horizontally */
+  font-size: 0.85em !important; /* reduce text size */
+}
+
+.reveal th, .reveal td {
+  padding: 6px 8px !important;
+}
+
+
 /* ---- Typography rules ---- */
 
 /* Body text, bullets, and small text -> Helvetica */
