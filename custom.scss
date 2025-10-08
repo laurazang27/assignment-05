@@ -28,14 +28,22 @@ $presentation-heading-color: #383d3d !default;
 /*-- scss:rules --*/
 
 /* Make all tables fit slides better */
+
 .reveal table {
-  width: 80% !important;      /* shrink width */
-  margin: 0 auto !important;  /* center horizontally */
-  font-size: 0.85em !important; /* reduce text size */
+  width: 70% !important;       /* was 80% — slightly narrower */
+  margin: 0 auto !important;   /* center on slide */
+  font-size: 0.8em !important; /* smaller text for better fit */
 }
 
 .reveal th, .reveal td {
-  padding: 6px 8px !important;
+  padding: 4px 6px !important; /* tighter padding */
+}
+
+.reveal caption {
+  font-size: 0.75em;
+  font-style: italic;
+  color: #333;
+  margin-top: 0.5em;
 }
 
 
@@ -123,13 +131,12 @@ $presentation-heading-color: #383d3d !default;
   line-height: 1.3 !important;
 }
 
-/* ---- Title slide font override ---- */
+/*  Title slide font override  */
 .reveal .title-slide {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif !important;
   color: #383d3d; /* keep same heading color */
 }
 
-/* Optional: slightly larger spacing for visual balance */
 .reveal .title-slide h1,
 .reveal .title-slide h2,
 .reveal .title-slide p {
